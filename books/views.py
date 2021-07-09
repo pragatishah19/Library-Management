@@ -30,13 +30,13 @@ def Home_view(request):
         'num': number,
         'date':date
     }
-    return render(request,"books/home.html",context)
+    return render(request,"Books/home.html",context)
 def About(request):
-    return render(request,"books/about.html")
+    return render(request,"Books/about.html")
 def Contact_us(request):
-    return render(request,"books/contact_us.html")
+    return render(request,"Books/contact_us.html")
 def static_demo_view(request):
-    return render(request,"books/static_demo.html")
+    return render(request,"Books/static_demo.html")
 
 def Genre_create_view(request):
     form = GenreForm(request.POST or None,request.FILES or None)
@@ -46,11 +46,11 @@ def Genre_create_view(request):
     context = {
         'form' : form
     }
-    return render(request,'books/book_create.html',context)
+    return render(request,'Books/book_create.html',context)
 
 class BookDetailView(DetailView):
     model=Books
-    template_name = "books/book_detail.html"
+    template_name = "Books/book_detail.html"
 
     def get_object(self):
         pk=self.kwargs.get('pk')
@@ -58,17 +58,17 @@ class BookDetailView(DetailView):
 
 class BookListView(ListView):
     queryset = Books.objects.all()
-    template_name = 'books/book_list_view.html'
+    template_name = 'Books/book_list_view.html'
 
 class BookCreateView(CreateView):
-    template_name = "books/book_create.html"
+    template_name = "Books/book_create.html"
     form_class = BookForm
 
     def get_success_url(self):
         return reverse("books:book_list_view")
 
 class BookUpdateView(UpdateView):
-    template_name = "books/book_update.html"
+    template_name = "Books/book_update.html"
     form_class = BookForm
 
     def get_success_url(self):
@@ -79,7 +79,7 @@ class BookUpdateView(UpdateView):
         return get_object_or_404(Books,pk=pk)
 
 class BookDeleteView(DeleteView):
-    template_name = "books/book_delete.html"
+    template_name = "Books/book_delete.html"
 
     def get_success_url(self):
         return reverse("books:book_list_view")
@@ -96,7 +96,7 @@ def Book_create_view(request):
     context = {
         'form' : form
     }
-    return render(request,"books/book_create.html",context)
+    return render(request,"Books/book_create.html",context)
 
 def Book_update_view(request,pk):
     books=get_object_or_404(Books,pk=pk)
@@ -106,7 +106,7 @@ def Book_update_view(request,pk):
     context = {
         'form':form
     }
-    return render(request,'books/book_update.html',context)
+    return render(request,'Books/book_update.html',context)
 
 # def Book_delete_view(request,pk):
 #     books=get_object_or_404(Books,pk=pk)
@@ -116,7 +116,7 @@ def Book_update_view(request,pk):
 #     context={
 #         'books':books
 #     }
-#     return render(request,'books/book_delete.html',context)
+#     return render(request,'Books/book_delete.html',context)
 def Book_delete_view(request,pk):
     if request.method =='POST':
         books=get_object_or_404(Books,pk=pk)
@@ -128,7 +128,7 @@ def Book_delete_view(request,pk):
 #     context = {
 #         'books':books
 #     }
-#     return render(request,"books/book_list_view.html",context)
+#     return render(request,"Books/book_list_view.html",context)
 
 def Book_list_view(request):
     books = Books.objects.all()
@@ -141,24 +141,24 @@ def Book_list_view(request):
         'books_list':books,
         'form':form
     }
-    return render(request,"books/book_list.html",context)
+    return render(request,"Books/book_list.html",context)
 
 def Book_index_view(request):
     books = Books.objects.all()
     context = {
         'books':books
     }
-    return render(request,"books/book_index.html",context)
+    return render(request,"Books/book_index.html",context)
 
 def Book_detail_view(request,pk):
     books = get_object_or_404(Books,pk=pk)
     context={
         'books':books
     }
-    return render(request,'books/book_detail.html',context)
+    return render(request,'Books/book_detail.html',context)
 
 class AuthorDetailView(DetailView):
-    template_name = 'books/author_detail.html'
+    template_name = 'Books/author_detail.html'
     model = Author
 
     def get_object(self):
@@ -167,7 +167,7 @@ class AuthorDetailView(DetailView):
 
 class AuthorListView(ListView):
     queryset = Author.objects.all()
-    template_name = 'books/author_list_view.html'
+    template_name = 'Books/author_list_view.html'
 
 def Author_create_view(request):
     form = AuthorForm(request.POST or None)
@@ -178,7 +178,7 @@ def Author_create_view(request):
     context = {
         'form' : form
     }
-    return render(request,'books/author_create.html',context)
+    return render(request,'Books/author_create.html',context)
 
 def Author_update_view(request,pk):
     author =get_object_or_404(Author,pk=pk)
@@ -189,7 +189,7 @@ def Author_update_view(request,pk):
     context = {
         'form':form
     }
-    return render(request,'books/author_update.html',context)
+    return render(request,'Books/author_update.html',context)
 
 def Author_delete_view(request,pk):
     author = get_object_or_404(Author,pk=pk)
@@ -199,24 +199,24 @@ def Author_delete_view(request,pk):
     context = {
         'author':author
     }
-    return render(request,'books/author_delete.html',context)
+    return render(request,'Books/author_delete.html',context)
     
 def Author_list_view(request):
     author = Author.objects.all()
     context = {
         'author':author
     }
-    return render(request,"books/author_list_view.html",context)
+    return render(request,"Books/author_list_view.html",context)
 
 def Author_index_view(request):
-    return render(request,'books/author_index.html')
+    return render(request,'Books/author_index.html')
 
 def Author_detail_view(request,pk):
     author = get_object_or_404(Author,pk=pk)
     context = {
         'author':author
     }
-    return render(request,'books/author_detail.html',context)
+    return render(request,'Books/author_detail.html',context)
 
 def User_create_view(request):
     form = UserForm(request.POST or None)
@@ -226,7 +226,7 @@ def User_create_view(request):
     context = {
         'form' : form
     }
-    return render(request,'books/user_create.html',context)
+    return render(request,'Books/user_create.html',context)
 
 def User_update_view(request,pk):
     user = get_object_or_404(User,pk=pk)
@@ -237,7 +237,7 @@ def User_update_view(request,pk):
     context={
         'form':form
     }
-    return render(request,'books/user_update.html',context)
+    return render(request,'Books/user_update.html',context)
 
 def User_delete_view(request,pk):
     user=get_object_or_404(User,pk=pk)
@@ -247,21 +247,21 @@ def User_delete_view(request,pk):
     context = {
         'user': user
     }
-    return render(request,'books/user_delete.html',context)
+    return render(request,'Books/user_delete.html',context)
 
 def User_list_view(request):
     user = User.objects.all()
     context = {
         'user':user
     }
-    return render(request,"books/user_list_view.html",context)
+    return render(request,"Books/user_list_view.html",context)
 
 def User_index_view(request):
     user = User.objects.all()
     context = {
         'user':user
     }
-    return render(request,'books/user_index.html',context)
+    return render(request,'Books/user_index.html',context)
 
 def User_detail_view(request,pk):
     user=get_object_or_404(User,pk=pk)
@@ -270,7 +270,7 @@ def User_detail_view(request,pk):
         'user':user,
         'books':books
     }
-    return render(request,'books/user_detail.html',context)
+    return render(request,'Books/user_detail.html',context)
 
 def Book_issue_view(request):
     if request.method == 'GET':
@@ -297,7 +297,7 @@ def Book_issue_view(request):
         send_mail( subject, message, email_from, recipient_list )    
         return redirect(reverse('books:user_detail_view', args = [user_pk]))
 
-    return render(request,'books/book_issue.html',context)
+    return render(request,'Books/book_issue.html',context)
 
 def Book_return_view(request,pk):
     user=get_object_or_404(User,pk=pk)

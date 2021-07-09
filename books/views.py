@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404,redirect
@@ -31,6 +32,7 @@ def Home_view(request):
         'date':date
     }
     return render(request,"Books/home.html",context)
+@login_required
 def About(request):
     return render(request,"Books/about.html")
 def Contact_us(request):
